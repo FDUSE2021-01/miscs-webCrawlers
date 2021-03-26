@@ -19,6 +19,9 @@ def main(config: dict):
     frame = frame[0]
     lowestPrice = frame[frame['Store'] == 'Steam']['Lowest'].item()
 
+def daily():
+    raise NotImplementedError()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='get lowest price of item on steam')
     parser.add_argument('-i', '--item-name', dest='itemName',
