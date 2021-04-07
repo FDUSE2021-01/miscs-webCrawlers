@@ -3,6 +3,6 @@
 import sqlite3
 
 if __name__ == '__main__':
-    myConnection = sqlite3.connect()
-    import history.daily
-    history.daily()
+    with sqlite3.connect() as myConnection:
+        import history.daily
+        history.daily(myConnection)

@@ -19,7 +19,7 @@ def main(config: dict):
     frame = frame[0]
     lowestPrice = frame[frame['Store'] == 'Steam']['Lowest'].item()
 
-def daily():
+def daily(conn):
     raise NotImplementedError()
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import re
 import pandas as pd
 import argparse
+import sqlite3
 
 def main(config: dict):
     pageRange = range(config.pageMin, config.pageMax)
@@ -45,6 +46,8 @@ def main(config: dict):
             results.append(result)
     frame = pd.DataFrame.from_records(results)
     frame.to_excel('results/temp.xlsx')
+    conn = sqlite3.connect('../drf/db.sqlite3')
+    frame.to_sql('articles_game', conn)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='crawl sales on steam platform')
@@ -57,4 +60,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     main(args)
-    
+    frame = pd.read_excel('results/temp.xlsx', index_col= 0)
+    conn = sqlite3.connect('../drf/db.sqlite3')
+    frame.to_sql('articles_game', conn)
